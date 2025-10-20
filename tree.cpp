@@ -17,8 +17,8 @@ using namespace std;
 class NodeTree {
     public:
         // CONSTRUCTORS
-        NodeTree(int value, string key)
-        NodeTree(int value, string key, NodeTree* parent)
+        NodeTree(int value, string key);
+        NodeTree(int value, string key, NodeTree* parent);
 
         // variables
         int nodeValue;
@@ -26,7 +26,7 @@ class NodeTree {
         NodeTree* nodeParent;
 
         // imported a set library to track children
-        set<NodeTree> children;
+        set<NodeTree*> children;
 };
 
 // CONSTRUCTORS
@@ -44,15 +44,26 @@ NodeTree::NodeTree(int value, string key, NodeTree* parent) {
 
 
 // define tree structure here
+Class TreeMST {
+    public:
+        // CONSTRUCTORS
+        TreeMST(NodeTree root);
+        
+        // GETTERS
+        int getHeight();
+        int getNodeCount();
+        NodeTree* getRoot();
 
+        bool containsNode(TreeNode node);
 
-// GETTERS
+        // SETTERS
+        bool addNode(TreeNode newNode, TreeNode Parent); // returns true if successfully added
+        bool changeNodeKey(TreeNode node, string newKey);
+        bool changeNodeVal(TreeNode node, int newVal);
 
-// height
-
-// number of nodes
-
-// SETTERS?? -- do we need these?
+    private:
+        NodeTree* root;
+};
 
 // add node to tree
 
