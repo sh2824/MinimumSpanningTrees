@@ -1,6 +1,8 @@
 #include <cstdlib>
 #include <cmath>
 
+#include "tree.cpp"
+
 using namespace std;
 
 // ******************************************************

@@ -1,6 +1,9 @@
 #include <cstdlib>
 #include <string>
 
+#include "tree.cpp"
+#include "kruskal.cpp"
+#include "prim.cpp"
 
 
 using namespace std;
