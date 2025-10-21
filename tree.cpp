@@ -1,6 +1,9 @@
 #include <cstdlib>
 #include <cmath>
+#include <string>
 #include <set>
+
+#include "tree.h"
 
 using namespace std;
 
@@ -13,21 +16,6 @@ using namespace std;
  * nodes in tree have children represented using a set
 */
 
-// define node structure here (trees need nodes)
-class NodeTree {
-    public:
-        // CONSTRUCTORS
-        NodeTree(int value, string key);
-        NodeTree(int value, string key, NodeTree* parent);
-
-        // variables
-        int nodeValue;
-        string nodeKey;
-        NodeTree* nodeParent;
-
-        // imported a set library to track children
-        set<NodeTree*> children;
-};
 
 // CONSTRUCTORS
 NodeTree::NodeTree(int value, string key) {
@@ -41,32 +29,4 @@ NodeTree::NodeTree(int value, string key, NodeTree* parent) {
     this->nodeKey = key;
     this->nodeParent = parent;
 }
-
-
-// define tree structure here
-Class TreeMST {
-    public:
-        // CONSTRUCTORS
-        TreeMST(NodeTree root);
-        
-        // GETTERS
-        int getHeight();
-        int getNodeCount();
-        NodeTree* getRoot();
-
-        bool containsNode(TreeNode node);
-
-        // SETTERS
-        bool addNode(TreeNode newNode, TreeNode Parent); // returns true if successfully added
-        bool changeNodeKey(TreeNode node, string newKey);
-        bool changeNodeVal(TreeNode node, int newVal);
-
-    private:
-        NodeTree* root;
-};
-
-// add node to tree
-
-// change node in tree
-
 

@@ -1,5 +1,7 @@
 #include <cstdlib>
 #include <cmath>
+#include <string>
+#include <set>
 
 #include "tree.cpp"
 

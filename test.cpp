@@ -1,9 +1,9 @@
 #include <cstdlib>
+#include <cmath>
 #include <string>
+#include <set>
 
-#include "tree.cpp"
-#include "kruskal.cpp"
-#include "prim.cpp"
+//#include "kruskal.cpp"
 
 
 using namespace std;
