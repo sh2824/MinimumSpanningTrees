@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <string>
-#include <set>
+#include <vector>
 
 #include "tree.h"
 
@@ -18,15 +18,19 @@ using namespace std;
 
 
 // CONSTRUCTORS
-NodeTree::NodeTree(int value, string key) {
-    this->nodeValue = value;
-    this->nodeKey = key;
-    this->nodeParent = nullptr;
-}
+// NodeTree::NodeTree(int value, string key) {
+//     this->nodeValue = value;
+//     this->nodeKey = key;
+//     this->nodeParent = nullptr;
+// }
 
-NodeTree::NodeTree(int value, string key, NodeTree* parent) {
-    this->nodeValue = value;
-    this->nodeKey = key;
-    this->nodeParent = parent;
-}
+// NodeTree::NodeTree(int value, string key, NodeTree* parent) {
+//     this->nodeValue = value;
+//     this->nodeKey = key;
+//     this->nodeParent = parent;
+// }
+
+TreeMST::TreeMST(Node* root) {
+    this->root = root;
+};
 

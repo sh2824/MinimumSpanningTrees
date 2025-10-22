@@ -5,8 +5,7 @@
 #include <cmath>
 #include <string>
 #include <vector>
-
-#include <graph.cpp>
+#include <unordered_map>
 
 using namespace std;
 
@@ -28,12 +27,20 @@ struct Edge {
 
 class Graph {
     public:
-        Graph() = default;
+        Graph();
+        Graph(string rootVertex);
 
         bool addVertex(string newVertex);
+        bool addEdge(Edge newEdge);
         bool addEdge(string sourceVertex, string destinationVertex, double newWeight);
         vector<Edge> getAllEdges() const;
         void print() const;
     private:
+        // the adjacency list for the graph
+        // string[node]: (string[neighbor], double[edgeWeight]), (x,y), ...;
         unordered_map<string, vector<pair<string, double>>> adjList;
-}
+        int vertexCount;
+};
+
+
+#endif

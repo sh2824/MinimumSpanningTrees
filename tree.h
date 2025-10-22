@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <string>
-#include <set>
+#include <vector>
 
 using namespace std;
 
@@ -18,31 +18,31 @@ using namespace std;
 */
 
 // define node structure here (trees need nodes)
-struct NodeTree {
+struct Node {
     string key;
-    vector<NodeTree*> children;
+    vector<Node> children;
 };
 
 // define tree structure here
 class TreeMST {
     public:
         // CONSTRUCTORS
-        TreeMST(NodeTree root);
+        TreeMST(Node* root);
         
         // GETTERS
         int getHeight();
         int getNodeCount();
-        NodeTree* getRoot();
+        Node* getRoot();
 
-        bool containsNode(NodeTree node);
+        bool containsNode(Node node);
 
         // SETTERS
-        bool addNode(NodeTree newNode, NodeTree Parent); // returns true if successfully added
-        bool changeNodeKey(NodeTree node, string newKey);
-        bool changeNodeVal(NodeTree node, int newVal);
+        bool addNode(Node newNode, Node Parent); // returns true if successfully added
+        bool changeNodeKey(Node node, string newKey);
+        bool changeNodeVal(Node node, int newVal);
 
     private:
-        NodeTree* root;
+        Node* root;
 };
 
 #endif

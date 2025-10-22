@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 
-//#include "kruskal.cpp"
+#include "kruskal.cpp"
 
 
 using namespace std;

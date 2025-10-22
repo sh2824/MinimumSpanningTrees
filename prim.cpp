@@ -3,7 +3,7 @@
 #include <string>
 #include <set>
 
-#include "tree.cpp"
+#include "tree.h"
 
 using namespace std;
 
