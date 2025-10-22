@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include <graph.cpp>
+
 using namespace std;
 
 /*
@@ -26,9 +28,12 @@ struct Edge {
 
 class Graph {
     public:
+        Graph() = default;
+
         bool addVertex(string newVertex);
         bool addEdge(string sourceVertex, string destinationVertex, double newWeight);
         vector<Edge> getAllEdges() const;
+        void print() const;
     private:
         unordered_map<string, vector<pair<string, double>>> adjList;
 }

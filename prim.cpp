@@ -3,12 +3,12 @@
 #include <string>
 #include <set>
 
-//#include "tree.cpp"
+#include "tree.cpp"
 
 using namespace std;
 
 // ******************************************************
-/* kruskalMST: graph -> tree
+/* primMST: graph -> tree
  * expects a weighted graph represented as an adjacency list
  * returns a minimum spanning tree represented as a linked list
  * Example: 

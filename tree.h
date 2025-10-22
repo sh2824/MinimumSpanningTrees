@@ -18,19 +18,9 @@ using namespace std;
 */
 
 // define node structure here (trees need nodes)
-class NodeTree {
-    public:
-        // CONSTRUCTORS
-        NodeTree(int value, string key);
-        NodeTree(int value, string key, NodeTree* parent);
-
-        // variables
-        int nodeValue;
-        string nodeKey;
-        NodeTree* nodeParent;
-
-        // imported a set library to track children
-        set<NodeTree*> children;
+struct NodeTree {
+    string key;
+    vector<NodeTree*> children;
 };
 
 // define tree structure here
@@ -54,10 +44,5 @@ class TreeMST {
     private:
         NodeTree* root;
 };
-
-// add node to tree
-
-// change node in tree
-
 
 #endif
