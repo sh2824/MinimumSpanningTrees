@@ -1,0 +1,30 @@
+{
+    "DocumentType": "UndirectedGraph",
+    "vertexList": [
+        "John", 
+        "Abby",
+        "Lexi",
+        "Tanya",
+        "Todd",
+        "Tim",
+        "William",
+        "Mac",
+        "Felix"
+    ],
+    "edgeList": [
+        {"source":"John", "destination":"Abby", "weight":"28"},
+        {"source":"John", "destination":"Tim", "weight":"30"},
+        {"source":"John", "destination":"Todd", "weight":"21"},
+        {"source":"John", "destination":"Will", "weight":"22"},
+        {"source":"John", "destination":"Mac", "weight":"19"},
+        {"source":"Abby", "destination":"Tanya", "weight":"15"},
+        {"source":"Abby", "destination":"Lexi", "weight":"30"},
+        {"source":"Mac", "destination":"Will", "weight":"10"},
+        {"source":"Mac", "destination":"Todd", "weight":"18"},
+        {"source":"Mac", "destination":"Tim", "weight":"7"},
+        {"source":"Mac", "destination":"Felix", "weight":"3"},
+        {"source":"Will", "destination":"Felix", "weight":"4"},
+        {"source":"Tim", "destination":"Todd", "weight":"29"},
+        {"source":"Tim", "destination":"Will", "weight":"1"}
+    ]
+}
