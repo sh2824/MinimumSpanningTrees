@@ -1,8 +1,8 @@
 #include <cstdlib>
 #include <cmath>
 #include <string>
-#include <set>
 #include <iostream>
+#include <vector>
 
 #include "kruskal.cpp"
 #include "graph.h"
@@ -26,6 +26,14 @@ int main() {
     // graphs are adjacency lists
 
     // GRAPH A
+    Graph graphA("Fortuna");
+    graphA.addVertex("Eureka");
+
+    graphA.addEdge("Fortuna", "Eureka", 18.0);
+    graphA.addEdge("Eureka", "Trinidad", 22.9);
+    graphA.addEdge("Eureka", "Fortuna", 18.0);
+
+    graphA.print();
 
     // GRAPH B
 

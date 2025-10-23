@@ -37,10 +37,11 @@ class Graph {
 
         vector<string> getAllVertices() const;
         void print() const;
-    private:
+    protected:
         // the adjacency list for the graph
         // string[node]: (string[neighbor], double[edgeWeight]), (x,y), ...;
         unordered_map<string, vector<pair<string, double>>> adjList;
+    private:
         int vertexCount;
         int edgeCount;
 };

@@ -38,8 +38,19 @@ bool Graph::addEdge(string sourceVertex, string destinationVertex, double newWei
 
 vector<string> Graph::getAllVertices() const {
     cout << "getAllVertices: not yet functional\n";
+    vector<string> collection;
+    collection.push_back("test1");
+    collection.push_back("test2");
+    collection.push_back("test3");
+    return collection;
 };
 
 void Graph::print() const {
-    cout << "print: not yet functional\n";
+    for (const auto& [node, neighbors] : adjList) {
+        cout << node << "->";
+        for (const auto& [neighbor, weight] : neighbors) {
+            cout << "(" << neighbor << ", " << weight << ")";
+        }
+        cout << endl;
+    }
 };
