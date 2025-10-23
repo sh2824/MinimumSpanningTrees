@@ -36,6 +36,34 @@ int main() {
     graphA.print();
 
     // GRAPH B
+    Graph graphB;
+    graphB.addVertex("A");
+    graphB.addVertex("B");
+    graphB.addVertex("C");
+    graphB.addVertex("D");
+    graphB.addVertex("E");
+    graphB.addVertex("F");
+    graphB.addVertex("G");
+    graphB.addVertex("H");
+    graphB.addVertex("I");
+    graphB.addVertex("J");
+
+    graphB.addEdge("A","B",1.2);
+    graphB.addEdge("A","C",3.2);
+    graphB.addEdge("C","D",2.1);
+    graphB.addEdge("A","F",9.6);
+    graphB.addEdge("B","F",3.1);
+    graphB.addEdge("C","F",0.2);
+    graphB.addEdge("C","E",14.3);
+    graphB.addEdge("D","E",3.3);
+    graphB.addEdge("E","J",5.6);
+    graphB.addEdge("D","H",4.9);
+    graphB.addEdge("H","F",0.1);
+    graphB.addEdge("E","G",6.9);
+    graphB.addEdge("G","I",7.8);
+    graphB.addEdge("F","G",2.1);
+
+    graphB.print();
 
     // GRAPH C
 
