@@ -10,10 +10,12 @@ using namespace std;
 
 Graph::Graph() {
     vertexCount = 0;
+    edgeCount = 0;
 };
 
 Graph::Graph(string rootVertex) {
     vertexCount = 1;
+    edgeCount = 0;
     adjList[rootVertex] = {};
 };
 
@@ -23,11 +25,21 @@ bool Graph::addVertex(string newVertex) {
 };
 
 bool Graph::addEdge(Edge newEdge) {
-    cout << "not yet functional\n";
+    // edgeCount++;
+    cout << "addEdge(Edge): not yet functional\n";
     return true;
 };
 
 bool Graph::addEdge(string sourceVertex, string destinationVertex, double newWeight) {
-    cout << "not yet functional\n";
+    edgeCount++;
+    adjList[sourceVertex].push_back({destinationVertex, newWeight});
     return true;
+};
+
+vector<string> Graph::getAllVertices() const {
+    cout << "getAllVertices: not yet functional\n";
+};
+
+void Graph::print() const {
+    cout << "print: not yet functional\n";
 };

@@ -30,16 +30,19 @@ class Graph {
         Graph();
         Graph(string rootVertex);
 
-        bool addVertex(string newVertex);
-        bool addEdge(Edge newEdge);
+        // return true if successful
+        bool addVertex(string newVertex);   // cannot add a vertex that already exists
+        bool addEdge(Edge newEdge);         // cannot add an edge that already exists
         bool addEdge(string sourceVertex, string destinationVertex, double newWeight);
-        vector<Edge> getAllEdges() const;
+
+        vector<string> getAllVertices() const;
         void print() const;
     private:
         // the adjacency list for the graph
         // string[node]: (string[neighbor], double[edgeWeight]), (x,y), ...;
         unordered_map<string, vector<pair<string, double>>> adjList;
         int vertexCount;
+        int edgeCount;
 };
 
 
