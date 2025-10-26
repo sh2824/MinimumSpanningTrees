@@ -28,6 +28,7 @@ struct Node {
 class TreeMST {
     public:
         // CONSTRUCTORS
+        TreeMST();
         TreeMST(Node* root);
         
         // ACCESSORS
@@ -38,11 +39,13 @@ class TreeMST {
         bool containsNode(Node node);
 
         // MODIFIERS
+        bool setRoot(Node root); // used if creating an empty tree
         bool addNode(Node newNode, Node Parent); // returns true if successfully added
         bool changeNodeKey(Node node, string newKey);
         bool changeNodeCost(Node node, double newCost);
 
     private:
+        Node* findNodeDFS(string searchKey, Node* currentNode);
         Node* root;
 };
 
