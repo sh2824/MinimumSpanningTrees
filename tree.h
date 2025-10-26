@@ -20,6 +20,7 @@ using namespace std;
 // define node structure here (trees need nodes)
 struct Node {
     string key;
+    double cost;
     vector<Node> children;
 };
 
@@ -29,17 +30,17 @@ class TreeMST {
         // CONSTRUCTORS
         TreeMST(Node* root);
         
-        // GETTERS
+        // ACCESSORS
         int getHeight();
         int getNodeCount();
         Node* getRoot();
 
         bool containsNode(Node node);
 
-        // SETTERS
+        // MODIFIERS
         bool addNode(Node newNode, Node Parent); // returns true if successfully added
         bool changeNodeKey(Node node, string newKey);
-        bool changeNodeVal(Node node, int newVal);
+        bool changeNodeCost(Node node, double newCost);
 
     private:
         Node* root;

@@ -16,21 +16,40 @@ using namespace std;
  * nodes in tree have children represented using a set
 */
 
-
-// CONSTRUCTORS
-// NodeTree::NodeTree(int value, string key) {
-//     this->nodeValue = value;
-//     this->nodeKey = key;
-//     this->nodeParent = nullptr;
-// }
-
-// NodeTree::NodeTree(int value, string key, NodeTree* parent) {
-//     this->nodeValue = value;
-//     this->nodeKey = key;
-//     this->nodeParent = parent;
-// }
-
+// CONSTRUCTOR
 TreeMST::TreeMST(Node* root) {
     this->root = root;
+};
+
+// ACCESSORS
+int TreeMST::getHeight() {
+    // comment
+    return 0;
+};
+int TreeMST::getNodeCount() {
+    // comment
+    return 0;
+};
+Node* TreeMST::getRoot() {
+    return root;
+}
+bool TreeMST::containsNode(Node node) {
+    // comment
+    return false;
+};
+
+
+// MODIFIERS
+bool TreeMST::addNode(Node newNode, Node Parent) {
+    // add node
+    return true;
+};
+bool TreeMST::changeNodeKey(Node node, string newKey) {
+    // change is good
+    return true;
+};
+bool TreeMST::changeNodeCost(Node node, double newCost) {
+    // coupons i guess
+    return true;
 };
 

@@ -77,6 +77,14 @@ int main() {
 
     graphC.print();
 
+    // Trees & nodes
+    /*
+     * need to first create a node to use as root
+     * create a tree and pass it that node as a root
+     * then we can add nodes to the tree
+     * 
+    */
+
 
 
     // TESTS
