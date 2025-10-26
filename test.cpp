@@ -26,6 +26,8 @@ int main() {
     // graphs are adjacency lists
 
     // GRAPH A
+    cout << "\n\nGraph A: cyclical directed weighted graph\n";
+    
     Graph graphA("Fortuna");
     graphA.addVertex("Eureka");
 
@@ -36,6 +38,7 @@ int main() {
     graphA.print();
 
     // GRAPH B
+    cout << "\n\nGraph B: acyclical directed and weighted graph\n";
     Graph graphB;
     graphB.addVertex("A");
     graphB.addVertex("B");
@@ -66,6 +69,13 @@ int main() {
     graphB.print();
 
     // GRAPH C
+    cout << "\n\nGRAPH C: loaded from JSON file\n";
+
+    // read from JSON file
+    Graph graphC;
+    graphC.loadFromJson("graphFriends.json");
+
+    graphC.print();
 
 
 
