@@ -35,6 +35,9 @@ class Graph {
         bool addEdge(Edge newEdge);         // cannot add an edge that already exists
         bool addEdge(string sourceVertex, string destinationVertex, double newWeight);
 
+        // load a graph from a json file
+        void loadFromJson(const string& filename);
+
         vector<string> getAllVertices() const;
         void print() const;
     protected:
