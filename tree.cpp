@@ -63,8 +63,9 @@ Node* TreeMST::findNodeDFS(string searchKey, Node* currentNode) {
     if (currentNode->key == searchKey) {
         return currentNode;
     }
-    for (const auto* child : currentNode->children) {
-        Node* result = findNodeDFS(searchKey, child);
+    for (Node child : currentNode->children) {
+        Node* childPtr = &child;
+        Node* result = findNodeDFS(searchKey, childPtr);
         if (result) return result;      
         // we only return if we hit null or our search so if we return nullptr
         // then its false and we skip this conditional but if we return th key
