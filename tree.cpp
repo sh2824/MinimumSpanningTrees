@@ -2,6 +2,7 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include <iostream>
 
 #include "tree.h"
 
@@ -63,9 +64,8 @@ Node* TreeMST::findNodeDFS(string searchKey, Node* currentNode) {
     if (currentNode->key == searchKey) {
         return currentNode;
     }
-    for (Node child : currentNode->children) {
-        Node* childPtr = &child;
-        Node* result = findNodeDFS(searchKey, childPtr);
+    for (Node* child : currentNode->children) {
+        Node* result = findNodeDFS(searchKey, child);
         if (result) return result;      
         // we only return if we hit null or our search so if we return nullptr
         // then its false and we skip this conditional but if we return th key
@@ -76,23 +76,63 @@ Node* TreeMST::findNodeDFS(string searchKey, Node* currentNode) {
 };
 
 // MODIFIERS
-bool TreeMST::setRoot(Node root) {
+bool TreeMST::setRoot(Node newRoot) {
     // check if there is a root
+    if (root) {
+        cout << "root already exists ABORTED\n";
+        return false;
+    } else {
+        cout << "root set\n";
+        root = &newRoot;
+    }
+
     // if not we simply set th root and return true
     // if there is a root we need to make the old root a child of the new root
     // and set the tree root to the new one
     return true;
 };
 bool TreeMST::addNode(Node newNode, Node Parent) {
+    // if there is no parent matching the parameter, return false
+    Node* new_ptr = &newNode;
+    Parent.children.push_back(new_ptr);
+    return true;
+};
+bool TreeMST::addNode(Node newNode, string parentKey) {
+    // if there is no parent matching the parameter, return false
     // add node
     return true;
 };
 bool TreeMST::changeNodeKey(Node node, string newKey) {
-    // change is good
+    node.key = newKey;
     return true;
 };
 bool TreeMST::changeNodeCost(Node node, double newCost) {
-    // coupons i guess
+    node.cost = newCost;
     return true;
 };
 
+void TreeMST::print() {
+    int depthCounter = 0;
+    printHelper(root, depthCounter);
+};
+void TreeMST::printHelper(Node* currentNode, int depth) {
+    // base case
+    if (!currentNode) return;
+
+    // print buffer
+    for (int i = 0; i < depth; i++) {
+        cout << "--";
+    }
+
+    // print current node
+    cout << currentNode->key << ", " << currentNode->cost << endl;
+
+    // print the kids recursively
+    for (Node* child : currentNode->children) {
+        //Node* child_ptr = &child;
+        printHelper(child, depth + 1);
+    }
+
+    // bug fixing
+    cout << "loop exit\n";
+};

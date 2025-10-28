@@ -83,7 +83,29 @@ int main() {
      * create a tree and pass it that node as a root
      * then we can add nodes to the tree
      * 
+     * we can also create an empty tree then set its root to a created Node
+     * 
     */
+
+    cout << "\nTESTING TREES\n";
+
+    TreeMST treeA;
+
+    cout << "Created empty treeA\n"
+         << "Printing empty tree\n";
+    treeA.print();
+
+    cout << "\nCreating Node for root of tree A\n";
+    vector<Node*> kiddos;
+    Node treeArootNode = {"A", 0, kiddos};
+
+    cout << "Setting Node as root\n";
+    treeA.setRoot(treeArootNode);
+    cout << "Setting Node as root again. should FAIL\n";
+    treeA.setRoot(treeArootNode);
+
+    cout << "printing tree A\n";
+    treeA.print();
 
 
 
