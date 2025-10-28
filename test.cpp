@@ -96,18 +96,36 @@ int main() {
     treeA.print();
 
     cout << "\nCreating Node for root of tree A\n";
-    vector<Node*> kiddos;
-    Node treeArootNode = {"A", 0, kiddos};
+    Node treeArootNode = {"A", 0, {}};
 
     cout << "Setting Node as root\n";
     treeA.setRoot(treeArootNode);
     cout << "Setting Node as root again. should FAIL\n";
     treeA.setRoot(treeArootNode);
 
-    cout << "printing tree A\n";
+    cout << "\nprinting tree A\n";
     treeA.print();
 
+    Node treeAchild1 = {"B", 2.5, {} };
+    Node treeAchild2 = {"C", 1.2, {} };
+    Node treeAchild3 = {"D", 3.7, {} };
+    Node treeAchild4 = {"E", 0.5, {} };
+    Node treeAchild5 = {"F", 4.1, {} };
 
+    treeA.addNode(treeAchild1, treeArootNode);
+    treeA.addNode(treeAchild2, treeArootNode);
+    treeA.addNode(treeAchild3, treeAchild1);
+    treeA.addNode(treeAchild4, treeAchild1);
+    treeA.addNode(treeAchild5, treeAchild4);
 
-    // TESTS
+    cout << "\nprinting tree A\n";
+    treeA.print();
+
+    // what if theres a cycle in th tree???
+
+    treeA.addNode(treeAchild1, treeAchild4);
+
+    cout << "apples\n";
+
+    treeA.print();
 }

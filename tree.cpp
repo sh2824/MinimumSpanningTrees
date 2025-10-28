@@ -76,7 +76,7 @@ Node* TreeMST::findNodeDFS(string searchKey, Node* currentNode) {
 };
 
 // MODIFIERS
-bool TreeMST::setRoot(Node newRoot) {
+bool TreeMST::setRoot(Node& newRoot) {
     // check if there is a root
     if (root) {
         cout << "root already exists ABORTED\n";
@@ -91,22 +91,27 @@ bool TreeMST::setRoot(Node newRoot) {
     // and set the tree root to the new one
     return true;
 };
-bool TreeMST::addNode(Node newNode, Node Parent) {
+bool TreeMST::addNode(Node& newNode, Node& Parent) {
     // if there is no parent matching the parameter, return false
     Node* new_ptr = &newNode;
+    Node* par_ptr = &Parent;
+    if (wouldCreateCycle(par_ptr, new_ptr)) {
+        cout << "Error: would create cycle: cycles cannot exist in tree\n";
+        return false;
+    }
     Parent.children.push_back(new_ptr);
     return true;
 };
-bool TreeMST::addNode(Node newNode, string parentKey) {
+bool TreeMST::addNode(Node& newNode, string parentKey) {
     // if there is no parent matching the parameter, return false
     // add node
     return true;
 };
-bool TreeMST::changeNodeKey(Node node, string newKey) {
+bool TreeMST::changeNodeKey(Node& node, string newKey) {
     node.key = newKey;
     return true;
 };
-bool TreeMST::changeNodeCost(Node node, double newCost) {
+bool TreeMST::changeNodeCost(Node& node, double newCost) {
     node.cost = newCost;
     return true;
 };
@@ -134,5 +139,20 @@ void TreeMST::printHelper(Node* currentNode, int depth) {
     }
 
     // bug fixing
-    cout << "loop exit\n";
+    //cout << "loop exit\n";
 };
+bool TreeMST::wouldCreateCycle(Node* parent, Node* child) {
+    // detect nullptr
+    if (!parent || !child) return true;
+    // detect self cycle
+    if (parent == child) return true;
+
+    // DFS from child
+    for (Node* c : child->children) {
+        if (wouldCreateCycle(parent, c)) {
+            return true;
+        }
+    }
+    // if we exit the loop it is safe to add the node
+    return false;
+}
