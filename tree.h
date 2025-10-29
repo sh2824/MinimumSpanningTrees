@@ -35,6 +35,7 @@ class TreeMST {
         int getHeight();
         int getNodeCount();
         Node* getRoot();
+        Node* findNodeDFS(string searchKey, Node* currentNode);
 
         bool containsNode(Node node);
 
@@ -49,7 +50,6 @@ class TreeMST {
         void print();
 
     private:
-        Node* findNodeDFS(string searchKey, Node* currentNode);
         bool wouldCreateCycle(Node* parent, Node* child);
         void printHelper(Node* currentNode, int depth);
         Node* root;

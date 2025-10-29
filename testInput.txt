@@ -1,0 +1,17 @@
+apple pie
+1.2
+
+banana
+1.3
+apple pie
+n
+
+fire cracker
+2.9
+apple pie
+n
+
+free gaza
+100.69
+fire cracker
+y

@@ -15,6 +15,12 @@ using namespace std;
  * the weight will be saved as the values of the nodes
  * the keys will be the node key.
  * nodes in tree have children represented using a set
+ * 
+ * need to write:
+ * getHeight
+ * getNodeCount
+ * containsNode
+ * addNode(Node&, string)
 */
 
 // CONSTRUCTOR
@@ -105,6 +111,7 @@ bool TreeMST::addNode(Node& newNode, Node& Parent) {
 bool TreeMST::addNode(Node& newNode, string parentKey) {
     // if there is no parent matching the parameter, return false
     // add node
+    cout << "addNode(Node&, string) not yet written\n";
     return true;
 };
 bool TreeMST::changeNodeKey(Node& node, string newKey) {

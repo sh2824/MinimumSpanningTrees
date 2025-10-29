@@ -123,9 +123,64 @@ int main() {
 
     // what if theres a cycle in th tree???
 
+    cout << "cycle test\n"; 
     treeA.addNode(treeAchild1, treeAchild4);
-
-    cout << "apples\n";
-
     treeA.print();
+
+    cout << "user input tree\n";
+    TreeMST treeB;
+    bool flag = true;
+    cout << "skip? [y/n]";
+    string skipInput;
+    getline(cin, skipInput);
+
+    if (skipInput == "y") flag = false;
+
+    while (flag) {
+        cout << "Enter key<string>: ";
+        string keyin;
+        getline(cin, keyin);
+        keyin = (string)keyin;
+        cout << "Enter cost<double>: ";
+        string costin;
+        getline(cin, costin);
+        double costin_d = 0.0;
+
+        try {
+            costin_d = stod(costin);
+        } catch (...) {
+            cerr << "Invalid cost, try again.\n";
+            break;
+        }
+
+        Node* inputNode = new Node;
+
+        inputNode->key = keyin;
+        inputNode->cost = costin_d;
+
+        if (!treeB.getRoot()) {
+            // if there is no root
+            cout << "No root detected setting root: " << keyin << endl;
+            treeB.setRoot(*inputNode);
+            continue;
+        }
+
+        cout << "Parent node key: ";
+        getline(cin, keyin);
+        keyin = (string)keyin;
+
+        // use my DFS to get the node belonging to that key and add input Node
+        // as a child of returned node
+        Node* parent_ptr = treeB.findNodeDFS(keyin, treeB.getRoot());
+
+        treeB.addNode(*inputNode, *parent_ptr);
+        cout << "EXIT? [y/n]";
+        getline(cin, keyin);
+        if (keyin == "y") {
+            flag = false;
+        }
+    }
+
+    cout << "print treeB\n";
+    treeB.print();
 }

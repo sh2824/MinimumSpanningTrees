@@ -1,0 +1,65 @@
+A, B, 2.5
+
+
+Graph A: cyclical directed weighted graph
+Eureka->(Trinidad, 22.9)(Fortuna, 18)
+Fortuna->(Eureka, 18)
+
+
+Graph B: acyclical directed and weighted graph
+J->
+G->(I, 7.8)
+F->(G, 2.1)
+E->(J, 5.6)(G, 6.9)
+H->(F, 0.1)
+B->(F, 3.1)
+I->
+D->(E, 3.3)(H, 4.9)
+C->(D, 2.1)(F, 0.2)(E, 14.3)
+A->(B, 1.2)(C, 3.2)(F, 9.6)
+
+
+GRAPH C: loaded from JSON file
+Mac->(John, 19)(Will, 10)(Todd, 18)(Tim, 7)(Felix, 3)
+Will->(John, 22)(Mac, 10)(Felix, 4)(Tim, 1)
+Tim->(John, 30)(Mac, 7)(Todd, 29)(Will, 1)
+Todd->(John, 21)(Mac, 18)(Tim, 29)
+Felix->(Mac, 3)(Will, 4)
+Lexi->(Abby, 30)
+Tanya->(Abby, 15)
+Abby->(John, 28)(Tanya, 15)(Lexi, 30)
+John->(Abby, 28)(Tim, 30)(Todd, 21)(Will, 22)(Mac, 19)
+
+TESTING TREES
+Created empty treeA
+Printing empty tree
+
+Creating Node for root of tree A
+Setting Node as root
+root set
+Setting Node as root again. should FAIL
+root already exists ABORTED
+
+printing tree A
+A, 0
+
+printing tree A
+A, 0
+--B, 2.5
+----D, 3.7
+----E, 0.5
+------F, 4.1
+--C, 1.2
+cycle test
+Error: would create cycle: cycles cannot exist in tree
+A, 0
+--B, 2.5
+----D, 3.7
+----E, 0.5
+------F, 4.1
+--C, 1.2
+user input tree
+Enter key<string>: Enter cost<double>: No root detected setting root: apple pie
+root set
+Enter key<string>: Enter cost<double>: print treeB for good measure
+apple pie, 1.2
