@@ -15,4 +15,10 @@ the file also needs a "vertexList" containing all vertices and an "edgeList" con
 
   {"source":"stringA", "destination":"stringB", "weight":double}
 
+### Tree Data Structure
+The tree data structure is created using pointers. The Tree object is a pointer to a root node.
+All nodes have a string key, double cost, and vector<Node*> children. the vector of Node pointers allows
+us to use this as a n-ary tree which is needed to make minimum spanning trees from graphs.
+
+### Kruskal's algorithm
 
