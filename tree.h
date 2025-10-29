@@ -21,28 +21,37 @@ using namespace std;
 struct Node {
     string key;
     double cost;
-    vector<Node> children;
+    vector<Node*> children;
 };
 
 // define tree structure here
 class TreeMST {
     public:
         // CONSTRUCTORS
+        TreeMST();
         TreeMST(Node* root);
         
         // ACCESSORS
         int getHeight();
         int getNodeCount();
         Node* getRoot();
+        Node* findNodeDFS(string searchKey, Node* currentNode);
 
         bool containsNode(Node node);
 
         // MODIFIERS
-        bool addNode(Node newNode, Node Parent); // returns true if successfully added
-        bool changeNodeKey(Node node, string newKey);
-        bool changeNodeCost(Node node, double newCost);
+        bool setRoot(Node& newRoot); // used if creating an empty tree
+        bool addNode(Node& newNode, Node& Parent); // returns true if successfully added
+        bool addNode(Node& newNode, string parentKey); // returns true if successfully added
+        bool changeNodeKey(Node& node, string newKey);
+        bool changeNodeCost(Node& node, double newCost);
+
+        // OTHER
+        void print();
 
     private:
+        bool wouldCreateCycle(Node* parent, Node* child);
+        void printHelper(Node* currentNode, int depth);
         Node* root;
 };
 

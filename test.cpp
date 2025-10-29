@@ -83,9 +83,106 @@ int main() {
      * create a tree and pass it that node as a root
      * then we can add nodes to the tree
      * 
+     * we can also create an empty tree then set its root to a created Node
+     * 
     */
 
+    cout << "\nTESTING TREES\n";
 
+    TreeMST treeA;
 
-    // TESTS
+    cout << "Created empty treeA\n"
+         << "Printing empty tree\n";
+    treeA.print();
+
+    cout << "\nCreating Node for root of tree A\n";
+    Node treeArootNode = {"A", 0, {}};
+
+    cout << "Setting Node as root\n";
+    treeA.setRoot(treeArootNode);
+    cout << "Setting Node as root again. should FAIL\n";
+    treeA.setRoot(treeArootNode);
+
+    cout << "\nprinting tree A\n";
+    treeA.print();
+
+    Node treeAchild1 = {"B", 2.5, {} };
+    Node treeAchild2 = {"C", 1.2, {} };
+    Node treeAchild3 = {"D", 3.7, {} };
+    Node treeAchild4 = {"E", 0.5, {} };
+    Node treeAchild5 = {"F", 4.1, {} };
+
+    treeA.addNode(treeAchild1, treeArootNode);
+    treeA.addNode(treeAchild2, treeArootNode);
+    treeA.addNode(treeAchild3, treeAchild1);
+    treeA.addNode(treeAchild4, treeAchild1);
+    treeA.addNode(treeAchild5, treeAchild4);
+
+    cout << "\nprinting tree A\n";
+    treeA.print();
+
+    // what if theres a cycle in th tree???
+
+    cout << "cycle test\n"; 
+    treeA.addNode(treeAchild1, treeAchild4);
+    treeA.print();
+
+    cout << "user input tree\n";
+    TreeMST treeB;
+    bool flag = true;
+    cout << "skip? [y/n]";
+    string skipInput;
+    getline(cin, skipInput);
+
+    if (skipInput == "y") flag = false;
+
+    while (flag) {
+        cout << "Enter key<string>: ";
+        string keyin;
+        getline(cin, keyin);
+        keyin = (string)keyin;
+        cout << "Enter cost<double>: ";
+        string costin;
+        getline(cin, costin);
+        double costin_d = 0.0;
+
+        try {
+            costin_d = stod(costin);
+        } catch (...) {
+            cerr << "Invalid cost, try again.\n";
+            break;
+        }
+
+        Node* inputNode = new Node;
+
+        inputNode->key = keyin;
+        inputNode->cost = costin_d;
+
+        if (!treeB.getRoot()) {
+            // if there is no root
+            cout << "No root detected setting root: " << keyin << endl;
+            treeB.setRoot(*inputNode);
+            continue;
+        }
+
+        cout << "Parent node key: ";
+        getline(cin, keyin);
+        keyin = (string)keyin;
+
+        // use my DFS to get the node belonging to that key and add input Node
+        // as a child of returned node
+        Node* parent_ptr = treeB.findNodeDFS(keyin, treeB.getRoot());
+
+        treeB.addNode(*inputNode, *parent_ptr);
+        cout << "EXIT? [y/n]";
+        getline(cin, keyin);
+        if (keyin == "y") {
+            flag = false;
+        }
+    }
+
+    cout << "print treeB\n";
+    treeB.print();
+
+    
 }
