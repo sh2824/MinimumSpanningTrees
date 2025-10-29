@@ -59,7 +59,4 @@ A, 0
 ------F, 4.1
 --C, 1.2
 user input tree
-Enter key<string>: Enter cost<double>: No root detected setting root: apple pie
-root set
-Enter key<string>: Enter cost<double>: print treeB for good measure
-apple pie, 1.2
+skip? [y/n]print treeB for good measure
