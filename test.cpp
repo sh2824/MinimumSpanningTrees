@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-#include "kruskal.cpp"
+#include "kruskal.h"
 #include "graph.h"
 #include "tree.h"
 

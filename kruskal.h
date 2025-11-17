@@ -22,12 +22,18 @@ class Kruskal {
     private:
         // helper: Disjoint set (union-find)
         struct DSU {
+            DSU() = default;
+            void makeSet(const string& node);
+            string find(const string& node);
+            void unite(const string& a, const string& b);
+            
+        private:
+            int findInt(int x);
             vector<int> parent;
             vector<int> rank;
 
-            DSU(int n);
-            int find(int x);
-            int unite(int a, int b);
+            unordered_map<string, int> nodeToIndex;
+            vector<string> indexToNode;
         };
 };
 

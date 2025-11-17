@@ -3,6 +3,7 @@
 #include <string>
 #include <set>
 #include <algorithm>
+#include <vector>
 
 #include "tree.h"
 #include "graph.h"
@@ -17,43 +18,65 @@ using namespace std;
  * Example: 
 */
 
-Kruskal::DSU::DSU(int n) : parent(n), rank(n, 0) {
-    for (int i = 0; i < n; i++) {
-        parent[i] = i;
-    }
+void Kruskal::DSU::makeSet(const string& node) {
+    if (nodeToIndex.count(node)) return;
+    int idx = parent.size();
+    nodeToIndex[node] = idx;
+    indexToNode.push_back(node);
+    parent.push_back(idx);
+    rank.push_back(0);
 }
 
-int Kruskal::DSU::find(int x) {
-    if (parent[x] != x) {
-        parent[x] = find(parent[x]);
-    }
+int Kruskal::DSU::findInt(int x) {
+    if (parent[x] != x) parent[x] = findInt(parent[x]);
     return parent[x];
 }
 
-void Kruskal::DSU::unite(int a, int b) {
-    a = find(a);
-    b = find(b);
-    if (a != b) {
-        if (rank[a] < rank[b])
-            swap(a, b);
-        parent[b] = a;
-        if (rank[a] == rank[b]) 
-            rank[a]++;
+string Kruskal::DSU::find(const string& node) {
+    makeSet(node);
+    int rootIdx = findInt(nodeToIndex[node]);
+    return indexToNode[rootIdx];
+}
+
+void Kruskal::DSU::unite(const string& a, const string& b) {
+    makeSet(a);
+    makeSet(b);
+
+    int rootA = findInt(nodeToIndex[a]);
+    int rootB = findInt(nodeToIndex[b]);
+
+    if (rootA != rootB) {
+        if (rank[rootA] < rank[rootB]) swap(rootA, rootB);
+        parent[rootB] = rootA;
+        if (rank[rootA] == rank[rootB]) rank[rootA]++;
     }
 }
 
 TreeMST Kruskal::run(const Graph& g) {
     // first extract all edges
-    auto edges = graph.getEdges();
+    vector<Edge> edges = g.getAllEdges();
 
     // next sort edges
+    sort(edges.begin(), edges.end(), 
+        [](const Edge& a, const Edge& b) {
+            return a.weight < b.weight;
+        }
+    );
 
     // create DSU
+    DSU dsu;
 
     // create tree to be returned
     TreeMST mst;
 
     // Kruskal
+    for (const auto& e : edges) {
+        if (dsu.find(e.source) != dsu.find(e.destination)) {
+            dsu.unite(e.source, e.destination);
+            Node node = {e.destination, e.weight};
+            mst.addNode(node, e.source);
+        }
+    }
 
     // return
     return mst;
