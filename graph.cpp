@@ -94,6 +94,12 @@ vector<string> Graph::getAllVertices() const {
     return collection;
 };
 
+vector<Edge> Graph::getAllEdges() const {
+    cout << "getAllEdges: not yet functional\n";
+    vector<Edge> edges;
+    return edges;
+}
+
 void Graph::print() const {
     for (const auto& [node, neighbors] : adjList) {
         cout << node << "->";
