@@ -41,6 +41,7 @@ class TreeMST {
 
         // MODIFIERS
         bool setRoot(Node& newRoot); // used if creating an empty tree
+        bool setRoot(string newRoot);
         bool addNode(Node& newNode, Node& Parent); // returns true if successfully added
         bool addNode(Node& newNode, string parentKey); // returns true if successfully added
         bool changeNodeKey(Node& node, string newKey);

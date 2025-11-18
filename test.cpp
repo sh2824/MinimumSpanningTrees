@@ -184,5 +184,25 @@ int main() {
     cout << "print treeB\n";
     treeB.print();
 
+    // TIME TO TEST KRUSKAL NOW
+    cout << "\nTime to test Kruskals algorithm."
+         << "\nFirst lets create a new graph from a JSON file.\n";
+
+    Graph kTest1;
+    kTest1.loadFromJson("graphTest1.json");
+
+    kTest1.print();
+
+    cout << "\nGraph created\nNow its time to test Kruskals\n";
+
+    TreeMST kTree1;
+
+    Kruskal k;
+
+    kTree1 = k.run(kTest1);
+
+    kTree1.print();
+    
+
     
 }
