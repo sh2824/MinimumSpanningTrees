@@ -22,6 +22,17 @@ struct Node {
     string key;
     double cost;
     vector<Node*> children;
+
+    Node(string nodeKey) {
+        key = nodeKey;
+        cost = 0.0;
+        children = vector<Node*>();
+    }
+    Node(string nodeKey, double c) {
+        key = nodeKey;
+        cost = c;
+        children = vector<Node*>();
+    }
 };
 
 // define tree structure here
@@ -41,6 +52,7 @@ class TreeMST {
 
         // MODIFIERS
         bool setRoot(Node& newRoot); // used if creating an empty tree
+        bool setRoot(string newRoot);
         bool addNode(Node& newNode, Node& Parent); // returns true if successfully added
         bool addNode(Node& newNode, string parentKey); // returns true if successfully added
         bool changeNodeKey(Node& node, string newKey);

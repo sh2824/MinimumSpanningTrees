@@ -1,0 +1,29 @@
+{
+    "Directed": 0,
+    "Weighted": 1,
+    "vertexList": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+        "F",
+        "G",
+        "H",
+        "J"
+    ],
+    "edgeList": [
+        {"source":"A", "destination":"B", "weight":1.2},
+        {"source":"A", "destination":"J", "weight":7.0},
+        {"source":"A", "destination":"C", "weight":4.8},
+        {"source":"B", "destination":"D", "weight":1.2},
+        {"source":"C", "destination":"D", "weight":3.7},
+        {"source":"D", "destination":"H", "weight":3.5},
+        {"source":"C", "destination":"E", "weight":8.2},
+        {"source":"C", "destination":"H", "weight":5.1},
+        {"source":"E", "destination":"G", "weight":2.4},
+        {"source":"H", "destination":"G", "weight":4.4},
+        {"source":"J", "destination":"E", "weight":6.1},
+        {"source":"F", "destination":"E", "weight":3.3}
+    ]
+}

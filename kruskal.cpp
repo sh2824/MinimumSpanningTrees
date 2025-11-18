@@ -4,6 +4,7 @@
 #include <set>
 #include <algorithm>
 #include <vector>
+#include <iostream>
 
 #include "tree.h"
 #include "graph.h"
@@ -20,7 +21,9 @@ using namespace std;
 
 void Kruskal::DSU::makeSet(const string& node) {
     if (nodeToIndex.count(node)) return;
+
     int idx = parent.size();
+    
     nodeToIndex[node] = idx;
     indexToNode.push_back(node);
     parent.push_back(idx);
@@ -33,8 +36,11 @@ int Kruskal::DSU::findInt(int x) {
 }
 
 string Kruskal::DSU::find(const string& node) {
-    makeSet(node);
-    int rootIdx = findInt(nodeToIndex[node]);
+    if (!nodeToIndex.count(node))
+        makeSet(node);
+
+    int idx = nodeToIndex[node];
+    int rootIdx = findInt(idx);
     return indexToNode[rootIdx];
 }
 
@@ -45,16 +51,24 @@ void Kruskal::DSU::unite(const string& a, const string& b) {
     int rootA = findInt(nodeToIndex[a]);
     int rootB = findInt(nodeToIndex[b]);
 
-    if (rootA != rootB) {
-        if (rank[rootA] < rank[rootB]) swap(rootA, rootB);
-        parent[rootB] = rootA;
-        if (rank[rootA] == rank[rootB]) rank[rootA]++;
-    }
+    if (rootA == rootB) return;
+
+    if (rank[rootA] < rank[rootB]) swap(rootA, rootB);
+
+    parent[rootB] = rootA;
+    if (rank[rootA] == rank[rootB]) rank[rootA]++;
+    
 }
 
 TreeMST Kruskal::run(const Graph& g) {
     // first extract all edges
     vector<Edge> edges = g.getAllEdges();
+
+    // create DSU
+    DSU dsu;
+    
+    // create tree to be returned
+    TreeMST mst;
 
     // next sort edges
     sort(edges.begin(), edges.end(), 
@@ -63,18 +77,35 @@ TreeMST Kruskal::run(const Graph& g) {
         }
     );
 
-    // create DSU
-    DSU dsu;
+    for (auto& e : edges) {
+        dsu.makeSet(e.source);
+        dsu.makeSet(e.destination);
+    }
+    
+    // Pick ANY node from the graph to serve as the root
+    if (!edges.empty()) {
+        mst.setRoot(edges[0].source);
+        cout << edges[0].source << endl;
+    } else {
+        return TreeMST();
+    }
 
-    // create tree to be returned
-    TreeMST mst;
+    // cout << edges[0].source << endl;
 
     // Kruskal
     for (const auto& e : edges) {
-        if (dsu.find(e.source) != dsu.find(e.destination)) {
-            dsu.unite(e.source, e.destination);
-            Node node = {e.destination, e.weight};
-            mst.addNode(node, e.source);
+        string u = dsu.find(e.source);
+        string v = dsu.find(e.destination);
+        double c = e.weight;
+        Node* n = new Node(v, c);
+
+        // cout << "e:" << e.to_string() <<" n:"<<n<<endl;
+
+        // cout << "u:" << u << " v:"<<v<<endl;
+
+        if (u != v) {
+            dsu.unite(u, v);
+            mst.addNode(*n, e.source);
         }
     }
 

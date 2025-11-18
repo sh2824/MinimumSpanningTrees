@@ -17,6 +17,10 @@ using namespace std;
 struct Edge {
     string source, destination;
     double weight;
+
+    // string to_string() {
+    //     return "{s:"<<self.source<<" d:"<<self.destination<<" w:"<<self.weight<<"}";
+    // }
 };
 
 /*

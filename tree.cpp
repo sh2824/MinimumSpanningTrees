@@ -64,13 +64,18 @@ bool TreeMST::containsNode(Node node) {
 */
 Node* TreeMST::findNodeDFS(string searchKey, Node* currentNode) {
     // base case
+    // cout << "POKER\n";
     if (!currentNode) return nullptr;
 
+    // cout << "BLACKJACK\n";
     // use DFS to find a node in a tree
     if (currentNode->key == searchKey) {
         return currentNode;
     }
+
+    // cout << "CRIBBAGE\n";
     for (Node* child : currentNode->children) {
+        cout << "Child ptr: " << child << endl;
         Node* result = findNodeDFS(searchKey, child);
         if (result) return result;      
         // we only return if we hit null or our search so if we return nullptr
@@ -92,9 +97,26 @@ bool TreeMST::setRoot(Node& newRoot) {
         root = &newRoot;
     }
 
-    // if not we simply set th root and return true
+    // if not we simply set the root and return true
+    // FUTURE IMPLEMENTATION MAYBE:
     // if there is a root we need to make the old root a child of the new root
     // and set the tree root to the new one
+
+    // CURRENT IMPLEMENTATION:
+    // if there is a root we return false and change nothing
+    return true;
+};
+bool TreeMST::setRoot(string newRoot) {
+    // check if there is a root
+    if (root) {
+        cout << "root already exists ABORTED\n";
+        return false;
+    } else {
+        cout << "root set\n";
+        Node* newRootNode = new Node(newRoot);
+        root = newRootNode;
+    }
+
     return true;
 };
 bool TreeMST::addNode(Node& newNode, Node& Parent) {
@@ -102,7 +124,7 @@ bool TreeMST::addNode(Node& newNode, Node& Parent) {
     Node* new_ptr = &newNode;
     Node* par_ptr = &Parent;
     if (wouldCreateCycle(par_ptr, new_ptr)) {
-        cout << "Error: would create cycle: cycles cannot exist in tree\n";
+        cout << "Error: would create cycle and cycles cannot exist in tree\n";
         return false;
     }
     Parent.children.push_back(new_ptr);
@@ -111,9 +133,22 @@ bool TreeMST::addNode(Node& newNode, Node& Parent) {
 bool TreeMST::addNode(Node& newNode, string parentKey) {
     // if there is no parent matching the parameter, return false
     // add node
-    cout << "addNode(Node&, string) not yet written\n";
+    cout << "addNode(Node&, string) WIP\n";
+    Node* new_ptr = &newNode;
+    Node* par_ptr = this->findNodeDFS(parentKey, this->root);
+    if (!par_ptr) {
+        cout << "null par_ptr\n";
+        return false;
+    }
+
+    if (wouldCreateCycle(par_ptr, new_ptr)) {
+        cout << "Error: would create cycle and cycles cannot exist in tree\n";
+        return false;
+    }
+    par_ptr->children.push_back(new_ptr);
     return true;
-};
+}; 
+
 bool TreeMST::changeNodeKey(Node& node, string newKey) {
     node.key = newKey;
     return true;
