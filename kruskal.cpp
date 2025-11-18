@@ -97,7 +97,7 @@ TreeMST Kruskal::run(const Graph& g) {
         string u = dsu.find(e.source);
         string v = dsu.find(e.destination);
         double c = e.weight;
-        Node n = {v, c};
+        Node* n = new Node(v, c);
 
         // cout << "e:" << e.to_string() <<" n:"<<n<<endl;
 
@@ -105,7 +105,7 @@ TreeMST Kruskal::run(const Graph& g) {
 
         if (u != v) {
             dsu.unite(u, v);
-            mst.addNode(n, e.source);
+            mst.addNode(*n, e.source);
         }
     }
 

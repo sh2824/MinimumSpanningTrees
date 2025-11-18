@@ -22,6 +22,17 @@ struct Node {
     string key;
     double cost;
     vector<Node*> children;
+
+    Node(string nodeKey) {
+        key = nodeKey;
+        cost = 0.0;
+        children = vector<Node*>();
+    }
+    Node(string nodeKey, double c) {
+        key = nodeKey;
+        cost = c;
+        children = vector<Node*>();
+    }
 };
 
 // define tree structure here

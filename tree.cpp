@@ -113,8 +113,8 @@ bool TreeMST::setRoot(string newRoot) {
         return false;
     } else {
         cout << "root set\n";
-        Node newRootNode = {newRoot, 0.0, {}};
-        root = &newRootNode;
+        Node* newRootNode = new Node(newRoot);
+        root = newRootNode;
     }
 
     return true;
@@ -135,18 +135,11 @@ bool TreeMST::addNode(Node& newNode, string parentKey) {
     // add node
     cout << "addNode(Node&, string) WIP\n";
     Node* new_ptr = &newNode;
-    cout << "APPLE\n";
-    cout << "root: " << this->root << endl;
     Node* par_ptr = this->findNodeDFS(parentKey, this->root);
-    cout << "BANANA\n";
     if (!par_ptr) {
-        cout <<"Error: parent with key " << parentKey << " not found\n";
+        cout << "null par_ptr\n";
         return false;
     }
-
-    cout << "null: " << nullptr << endl
-         << "new:  " << new_ptr << endl
-         << "par:  " << par_ptr << endl;
 
     if (wouldCreateCycle(par_ptr, new_ptr)) {
         cout << "Error: would create cycle and cycles cannot exist in tree\n";

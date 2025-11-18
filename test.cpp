@@ -96,27 +96,27 @@ int main() {
     treeA.print();
 
     cout << "\nCreating Node for root of tree A\n";
-    Node treeArootNode = {"A", 0, {}};
+    Node* treeArootNode = new Node("A", 0);
 
     cout << "Setting Node as root\n";
-    treeA.setRoot(treeArootNode);
+    treeA.setRoot(*treeArootNode);
     cout << "Setting Node as root again. should FAIL\n";
-    treeA.setRoot(treeArootNode);
+    treeA.setRoot(*treeArootNode);
 
     cout << "\nprinting tree A\n";
     treeA.print();
 
-    Node treeAchild1 = {"B", 2.5, {} };
-    Node treeAchild2 = {"C", 1.2, {} };
-    Node treeAchild3 = {"D", 3.7, {} };
-    Node treeAchild4 = {"E", 0.5, {} };
-    Node treeAchild5 = {"F", 4.1, {} };
+    Node* treeAchild1 = new Node("B", 2.5);
+    Node* treeAchild2 = new Node("C", 1.2);
+    Node* treeAchild3 = new Node("D", 3.7);
+    Node* treeAchild4 = new Node("E", 0.5);
+    Node* treeAchild5 = new Node("F", 4.1);
 
-    treeA.addNode(treeAchild1, treeArootNode);
-    treeA.addNode(treeAchild2, treeArootNode);
-    treeA.addNode(treeAchild3, treeAchild1);
-    treeA.addNode(treeAchild4, treeAchild1);
-    treeA.addNode(treeAchild5, treeAchild4);
+    treeA.addNode(*treeAchild1, *treeArootNode);
+    treeA.addNode(*treeAchild2, *treeArootNode);
+    treeA.addNode(*treeAchild3, *treeAchild1);
+    treeA.addNode(*treeAchild4, *treeAchild1);
+    treeA.addNode(*treeAchild5, *treeAchild4);
 
     cout << "\nprinting tree A\n";
     treeA.print();
@@ -124,7 +124,7 @@ int main() {
     // what if theres a cycle in th tree???
 
     cout << "cycle test\n"; 
-    treeA.addNode(treeAchild1, treeAchild4);
+    treeA.addNode(*treeAchild1, *treeAchild4);
     treeA.print();
 
     cout << "user input tree\n";
@@ -153,10 +153,7 @@ int main() {
             break;
         }
 
-        Node* inputNode = new Node;
-
-        inputNode->key = keyin;
-        inputNode->cost = costin_d;
+        Node* inputNode = new Node(keyin, costin_d);
 
         if (!treeB.getRoot()) {
             // if there is no root
