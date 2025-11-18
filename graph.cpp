@@ -94,6 +94,16 @@ vector<string> Graph::getAllVertices() const {
     return collection;
 };
 
+vector<Edge> Graph::getAllEdges() const {
+    vector<Edge> edges;
+    for (const auto& [node, neighbors] : adjList) {
+        for (const auto& [neighbor, weight] : neighbors) {
+            edges.push_back({node, neighbor, weight});
+        }
+    }
+    return edges;
+}
+
 void Graph::print() const {
     for (const auto& [node, neighbors] : adjList) {
         cout << node << "->";

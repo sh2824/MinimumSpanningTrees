@@ -39,6 +39,7 @@ class Graph {
         void loadFromJson(const string& filename);
 
         vector<string> getAllVertices() const;
+        vector<Edge> getAllEdges() const;
         void print() const;
     protected:
         // the adjacency list for the graph
