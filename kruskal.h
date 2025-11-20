@@ -18,6 +18,8 @@ class Kruskal {
 
         // takes a graph and outputs a Min Spanning Tree
         TreeMST run(const Graph& g);
+        void buildTreeFromGraph(const Graph& g, TreeMST& t, const string& rootKey);
+        void buildHelper(const Graph& g, TreeMST t, const string& currentKey, Node* parentNode, vector<string> visited);
 
     private:
         // helper: Disjoint set (union-find)

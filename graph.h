@@ -18,9 +18,9 @@ struct Edge {
     string source, destination;
     double weight;
 
-    // string to_string() {
-    //     return "{s:"<<self.source<<" d:"<<self.destination<<" w:"<<self.weight<<"}";
-    // }
+    string to_string() {
+        return "{s:" + source + " d:" + destination + " w:" + std::to_string(weight) + "}";
+    }
 };
 
 /*
@@ -38,6 +38,10 @@ class Graph {
         bool addVertex(string newVertex);   // cannot add a vertex that already exists
         bool addEdge(Edge newEdge);         // cannot add an edge that already exists
         bool addEdge(string sourceVertex, string destinationVertex, double newWeight);
+
+        bool edgeExists(Edge edgeCheck) const;
+        bool edgeExists(string sourceVertex, string destinationVertex, double newWeight) const;
+        bool wouldCreateCycle(string sourceVertex, string destinationVertex) const;
 
         // load a graph from a json file
         void loadFromJson(const string& filename);

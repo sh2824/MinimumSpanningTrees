@@ -64,11 +64,9 @@ TreeMST Kruskal::run(const Graph& g) {
     // first extract all edges
     vector<Edge> edges = g.getAllEdges();
 
-    // create DSU
-    DSU dsu;
-    
     // create tree to be returned
     TreeMST mst;
+    Graph tempGraph;
 
     // next sort edges
     sort(edges.begin(), edges.end(), 
@@ -77,38 +75,43 @@ TreeMST Kruskal::run(const Graph& g) {
         }
     );
 
-    for (auto& e : edges) {
-        dsu.makeSet(e.source);
-        dsu.makeSet(e.destination);
-    }
-    
-    // Pick ANY node from the graph to serve as the root
-    if (!edges.empty()) {
-        mst.setRoot(edges[0].source);
-        cout << edges[0].source << endl;
-    } else {
+    // if no edges return empty tree
+    if (edges.empty()) {
         return TreeMST();
     }
 
-    // cout << edges[0].source << endl;
-
     // Kruskal
     for (const auto& e : edges) {
-        string u = dsu.find(e.source);
-        string v = dsu.find(e.destination);
+        string u = e.source;
+        string v = e.destination;
         double c = e.weight;
-        Node* n = new Node(v, c);
 
-        // cout << "e:" << e.to_string() <<" n:"<<n<<endl;
-
-        // cout << "u:" << u << " v:"<<v<<endl;
-
-        if (u != v) {
-            dsu.unite(u, v);
-            mst.addNode(*n, e.source);
+        if (u != v && !tempGraph.wouldCreateCycle(u, v)) {
+            // cout << "ADDED " << u << " - " << v << ": " << c << "\n";
+            tempGraph.addEdge(u,v,c);
         }
     }
 
+    // use a DFS through the graph to add nodes to the tree
+    buildTreeFromGraph(tempGraph, mst, edges[0].source);
+
     // return
     return mst;
+}
+
+
+void Kruskal::buildTreeFromGraph(const Graph& g, TreeMST& t, const string& rootKey) {
+    // set root
+    Node* rootNode = new Node(rootKey, 0.0);
+    t.setRoot(*rootNode);
+
+    vector<string> visited;
+    buildHelper(g, t, rootKey, rootNode, visited);
+}
+void Kruskal::buildHelper(const Graph& g, TreeMST t, const string& currentKey, Node* parentNode, vector<string> visited) {
+    // make current node visited
+    visited.push_back(currentKey);
+
+    // get neighbors from graph for current
+    
 }
