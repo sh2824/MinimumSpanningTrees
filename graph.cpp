@@ -179,6 +179,14 @@ vector<Edge> Graph::getAllEdges() const {
     return edges;
 }
 
+
+const vector<pair<string, double>>& Graph::getNeighbors(const string& v) const {
+    // return the list of neighbors for a node as a const (immutable)
+    static const vector<pair<string, double>> empty;
+    auto it = adjList.find(v);
+    return (it == adjList.end()) ? empty : it->second;
+};
+
 void Graph::print() const {
     for (const auto& [node, neighbors] : adjList) {
         cout << node << "->";

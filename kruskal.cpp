@@ -108,10 +108,33 @@ void Kruskal::buildTreeFromGraph(const Graph& g, TreeMST& t, const string& rootK
     vector<string> visited;
     buildHelper(g, t, rootKey, rootNode, visited);
 }
-void Kruskal::buildHelper(const Graph& g, TreeMST t, const string& currentKey, Node* parentNode, vector<string> visited) {
+void Kruskal::buildHelper( // I love being able to use whitespace how I please
+    const Graph& g, 
+    TreeMST t, 
+    const string& currentKey, 
+    Node* parentNode, 
+    vector<string> visited) {
     // make current node visited
     visited.push_back(currentKey);
 
     // get neighbors from graph for current
-    
+    const auto& neighbors = g.getNeighbors(currentKey);
+
+    for (const auto& neighborPair : neighbors) {
+        const string& neighborKey = neighborPair.first;
+        double edgeWeight = neighborPair.second;
+
+        // skip if already visited
+        if (find(visited.begin(), visited.end(), neighborKey) != visited.end())
+            continue;
+        
+        // create new node for the tree
+        Node* newNode = new Node(neighborKey, edgeWeight);
+
+        // add node to tree under parent
+        t.addNode(*newNode, *parentNode);
+
+        // go further into the graph
+        buildHelper(g, t, neighborKey, newNode, visited);
+    }
 }
