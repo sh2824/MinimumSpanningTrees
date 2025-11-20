@@ -48,6 +48,7 @@ class Graph {
 
         vector<string> getAllVertices() const;
         vector<Edge> getAllEdges() const;
+        const vector<pair<string, double>>& getNeighbors(const string& v) const;
         void print() const;
     protected:
         // the adjacency list for the graph

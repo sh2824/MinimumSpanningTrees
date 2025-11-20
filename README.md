@@ -21,4 +21,12 @@ All nodes have a string key, double cost, and vector<Node*> children. the vector
 us to use this as a n-ary tree which is needed to make minimum spanning trees from graphs.
 
 ### Kruskal's algorithm
+Kruskal's algorithm is implemented by creating a kruskal object, then using its run method that takes a Graph
+object as input and returns a new TreeMST object. The Kruskal run method first makes a list of all edges in the
+tree then sorts that list by the weight of the edges. At this point run does a quick check to see it the graph
+passed as input had no edges. If the graph has no edges run returns an empty tree. A temporary Graph object is 
+created and the edges are added to the temporary graph starting with the lowest cost and skipping any edges that
+would create a cycle in the graph. Once that is finished our MST is created as a graph so we go to the selected 
+root Node of the Graph, usually the source of the lowest cost edge, and use a DFS algorithm to add nodes to a tree.
+Once the DFS finishes traversing the graph we return the tree created and it is a minimum spanning tree.
 

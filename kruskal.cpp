@@ -19,47 +19,6 @@ using namespace std;
  * Example: 
 */
 
-void Kruskal::DSU::makeSet(const string& node) {
-    if (nodeToIndex.count(node)) return;
-
-    int idx = parent.size();
-    
-    nodeToIndex[node] = idx;
-    indexToNode.push_back(node);
-    parent.push_back(idx);
-    rank.push_back(0);
-}
-
-int Kruskal::DSU::findInt(int x) {
-    if (parent[x] != x) parent[x] = findInt(parent[x]);
-    return parent[x];
-}
-
-string Kruskal::DSU::find(const string& node) {
-    if (!nodeToIndex.count(node))
-        makeSet(node);
-
-    int idx = nodeToIndex[node];
-    int rootIdx = findInt(idx);
-    return indexToNode[rootIdx];
-}
-
-void Kruskal::DSU::unite(const string& a, const string& b) {
-    makeSet(a);
-    makeSet(b);
-
-    int rootA = findInt(nodeToIndex[a]);
-    int rootB = findInt(nodeToIndex[b]);
-
-    if (rootA == rootB) return;
-
-    if (rank[rootA] < rank[rootB]) swap(rootA, rootB);
-
-    parent[rootB] = rootA;
-    if (rank[rootA] == rank[rootB]) rank[rootA]++;
-    
-}
-
 TreeMST Kruskal::run(const Graph& g) {
     // first extract all edges
     vector<Edge> edges = g.getAllEdges();
@@ -108,10 +67,33 @@ void Kruskal::buildTreeFromGraph(const Graph& g, TreeMST& t, const string& rootK
     vector<string> visited;
     buildHelper(g, t, rootKey, rootNode, visited);
 }
-void Kruskal::buildHelper(const Graph& g, TreeMST t, const string& currentKey, Node* parentNode, vector<string> visited) {
+void Kruskal::buildHelper( // I love being able to use whitespace how I please
+    const Graph& g, 
+    TreeMST t, 
+    const string& currentKey, 
+    Node* parentNode, 
+    vector<string> visited) {
     // make current node visited
     visited.push_back(currentKey);
 
     // get neighbors from graph for current
-    
+    const auto& neighbors = g.getNeighbors(currentKey);
+
+    for (const auto& neighborPair : neighbors) {
+        const string& neighborKey = neighborPair.first;
+        double edgeWeight = neighborPair.second;
+
+        // skip if already visited
+        if (find(visited.begin(), visited.end(), neighborKey) != visited.end())
+            continue;
+        
+        // create new node for the tree
+        Node* newNode = new Node(neighborKey, edgeWeight);
+
+        // add node to tree under parent
+        t.addNode(*newNode, *parentNode);
+
+        // go further into the graph
+        buildHelper(g, t, neighborKey, newNode, visited);
+    }
 }
