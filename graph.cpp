@@ -40,6 +40,81 @@ bool Graph::addEdge(string sourceVertex, string destinationVertex, double newWei
     return true;
 };
 
+bool Graph::edgeExists(Edge edgeCheck) const {
+    // if an edge exists in adjList then we return true else false
+    string src = edgeCheck.source;
+    string dest = edgeCheck.destination;
+    double weg = edgeCheck.weight;
+
+    return edgeExists(src, dest, weg);
+};
+
+bool Graph::edgeExists(string source, string destination, double weight) const {
+    //
+    if ((adjList.find(source) == adjList.end()) && (adjList.find(destination) == adjList.end())) {
+        return false; // neither nodes on edge are a source
+    }
+
+    // check edges from given source
+    auto sourceNode = adjList.find(source);
+    if (sourceNode != adjList.end()) {
+        for (const auto& [d, w] : sourceNode->second) {
+            if (d == destination) return true;
+        }
+    }
+    // check edges from given destination as source
+    auto destinationNode = adjList.find(destination);
+    if (destinationNode != adjList.end()) {
+        for (const auto& [d, w] : destinationNode->second) {
+            if (d == source) return true;
+        }
+    }
+    return false;
+};
+
+bool Graph::wouldCreateCycle(string sourceVertex, string destinationVertex) const {
+    // if either vertex doesn't exist it can't create a cycle
+    if (adjList.find(sourceVertex) == adjList.end() || adjList.find(destinationVertex) == adjList.end()) return false;
+
+    vector<pair<string, string>> myStack; // is pair to track parents
+    vector<string> visited;
+
+    myStack.push_back({sourceVertex, ""}); // "" = no parent
+
+    while (!myStack.empty()) {
+        // while it is not the case that the stack is empty
+        auto [current, parent] = myStack.back();
+        myStack.pop_back();
+
+        // check if we been here
+        bool alreadyVisited = false;
+        for (const string& v : visited) {
+            if (v == current) {
+                alreadyVisited = true;
+                break;
+            }
+        }
+        if (alreadyVisited) continue;
+
+        visited.push_back(current);
+
+        if (current == destinationVertex) 
+            return true; // cycle would form
+
+        auto vertexIterator = adjList.find(current);
+        if (vertexIterator != adjList.end()) {
+            const auto& neighbors = vertexIterator->second; // vector<pair<string, double>>
+            for (const auto& neighborPair : neighbors) {
+                const string& neighbor = neighborPair.first;
+                if (neighbor == parent) continue;
+                myStack.push_back({neighbor, current});
+            }
+        }
+        
+    }
+    return false; // cycle not possible
+};
+
 void Graph::loadFromJson(const string& filename) {
     // load the json file into the program
     ifstream file(filename);

@@ -198,6 +198,8 @@ int main() {
 
     kTree1 = k.run(kTest1);
 
+    cout << "\nPrinting Tree\n";
+
     kTree1.print();
     
 
