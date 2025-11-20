@@ -19,47 +19,6 @@ using namespace std;
  * Example: 
 */
 
-void Kruskal::DSU::makeSet(const string& node) {
-    if (nodeToIndex.count(node)) return;
-
-    int idx = parent.size();
-    
-    nodeToIndex[node] = idx;
-    indexToNode.push_back(node);
-    parent.push_back(idx);
-    rank.push_back(0);
-}
-
-int Kruskal::DSU::findInt(int x) {
-    if (parent[x] != x) parent[x] = findInt(parent[x]);
-    return parent[x];
-}
-
-string Kruskal::DSU::find(const string& node) {
-    if (!nodeToIndex.count(node))
-        makeSet(node);
-
-    int idx = nodeToIndex[node];
-    int rootIdx = findInt(idx);
-    return indexToNode[rootIdx];
-}
-
-void Kruskal::DSU::unite(const string& a, const string& b) {
-    makeSet(a);
-    makeSet(b);
-
-    int rootA = findInt(nodeToIndex[a]);
-    int rootB = findInt(nodeToIndex[b]);
-
-    if (rootA == rootB) return;
-
-    if (rank[rootA] < rank[rootB]) swap(rootA, rootB);
-
-    parent[rootB] = rootA;
-    if (rank[rootA] == rank[rootB]) rank[rootA]++;
-    
-}
-
 TreeMST Kruskal::run(const Graph& g) {
     // first extract all edges
     vector<Edge> edges = g.getAllEdges();

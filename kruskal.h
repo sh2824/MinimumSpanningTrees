@@ -21,22 +21,6 @@ class Kruskal {
         void buildTreeFromGraph(const Graph& g, TreeMST& t, const string& rootKey);
         void buildHelper(const Graph& g, TreeMST t, const string& currentKey, Node* parentNode, vector<string> visited);
 
-    private:
-        // helper: Disjoint set (union-find)
-        struct DSU {
-            DSU() = default;
-            void makeSet(const string& node);
-            string find(const string& node);
-            void unite(const string& a, const string& b);
-            
-        private:
-            int findInt(int x);
-            vector<int> parent;
-            vector<int> rank;
-
-            unordered_map<string, int> nodeToIndex;
-            vector<string> indexToNode;
-        };
 };
 
 #endif 
